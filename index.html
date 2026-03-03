@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بوابة الرافدين - IPTV</title>
+<title>اشور - IPTV</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1140,7 +1140,7 @@
         <input type="password" id="password" placeholder="••••••••" autocomplete="off">
       </div>
 
-      <button class="btn-login" id="login-btn" onclick="doLogin()">
+      <button class="btn-login" id="login-btn">
         <span id="login-btn-text">دخول البوابة</span>
       </button>
 
@@ -1150,8 +1150,8 @@
 
   <!-- MAIN APP -->
   <section id="main-section">
-    <button class="hamburger" id="hamburger-btn" onclick="toggleSidebar()">☰</button>
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+    <button class="hamburger" id="hamburger-btn">☰</button>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <div class="app-layout">
 
@@ -1163,17 +1163,17 @@
         </div>
 
         <nav class="sidebar-nav">
-          <button class="nav-item active" id="nav-live" onclick="switchTab('live', this)">
+          <button class="nav-item active" id="nav-live">
             <span class="nav-icon">📡</span>
             <span>البث المباشر</span>
             <span class="nav-count" id="live-count">0</span>
           </button>
-          <button class="nav-item" id="nav-movies" onclick="switchTab('movies', this)">
+          <button class="nav-item" id="nav-movies">
             <span class="nav-icon">🎬</span>
             <span>الأفلام</span>
             <span class="nav-count" id="movies-count">0</span>
           </button>
-          <button class="nav-item" id="nav-series" onclick="switchTab('series', this)">
+          <button class="nav-item" id="nav-series">
             <span class="nav-icon">📺</span>
             <span>المسلسلات</span>
             <span class="nav-count" id="series-count">0</span>
@@ -1181,7 +1181,7 @@
         </nav>
 
         <div class="sidebar-footer">
-          <button class="btn-logout" onclick="doLogout()">⟵ خروج</button>
+          <button class="btn-logout" id="logout-btn">⟵ خروج</button>
         </div>
       </aside>
 
@@ -1197,11 +1197,11 @@
             <div class="section-header"><h2>📡 البث المباشر</h2></div>
             <div class="search-bar">
               <span class="search-icon">🔍</span>
-              <input type="text" placeholder="ابحث عن قناة..." oninput="filterContent('live', this.value)">
+              <input type="text" id="live-search" placeholder="ابحث عن قناة...">
             </div>
             <!-- Category toggle -->
             <div class="cats-toggle-bar">
-              <button class="btn-toggle-cats" id="toggle-live-cats" onclick="toggleCats('live')">
+              <button class="btn-toggle-cats" id="toggle-live-cats">
                 🏷️ الأقسام <span class="toggle-arrow">▼</span>
               </button>
               <span class="cats-active-label" id="live-cats-label">الكل</span>
@@ -1218,11 +1218,11 @@
             <div class="section-header"><h2>🎬 الأفلام</h2></div>
             <div class="search-bar">
               <span class="search-icon">🔍</span>
-              <input type="text" placeholder="ابحث عن فيلم..." oninput="filterContent('movies', this.value)">
+              <input type="text" id="movies-search" placeholder="ابحث عن فيلم...">
             </div>
             <!-- Category toggle -->
             <div class="cats-toggle-bar">
-              <button class="btn-toggle-cats" id="toggle-movies-cats" onclick="toggleCats('movies')">
+              <button class="btn-toggle-cats" id="toggle-movies-cats">
                 🏷️ الأقسام <span class="toggle-arrow">▼</span>
               </button>
               <span class="cats-active-label" id="movies-cats-label">الكل</span>
@@ -1239,11 +1239,11 @@
             <div class="section-header"><h2>📺 المسلسلات</h2></div>
             <div class="search-bar">
               <span class="search-icon">🔍</span>
-              <input type="text" placeholder="ابحث عن مسلسل..." oninput="filterContent('series', this.value)">
+              <input type="text" id="series-search" placeholder="ابحث عن مسلسل...">
             </div>
             <!-- Category toggle -->
             <div class="cats-toggle-bar">
-              <button class="btn-toggle-cats" id="toggle-series-cats" onclick="toggleCats('series')">
+              <button class="btn-toggle-cats" id="toggle-series-cats">
                 🏷️ الأقسام <span class="toggle-arrow">▼</span>
               </button>
               <span class="cats-active-label" id="series-cats-label">الكل</span>
@@ -1269,7 +1269,7 @@
     <div class="corner corner-tr"></div>
     <div class="corner corner-bl"></div>
     <div class="corner corner-br"></div>
-    <button class="detail-close" onclick="closeSeriesModal()">✕</button>
+    <button class="detail-close" id="close-series-modal">✕</button>
     <div id="series-detail-content">
       <div class="series-loading">
         <div class="sumerian-spinner"></div>
@@ -1288,7 +1288,7 @@
     <div class="corner corner-br"></div>
     <div class="modal-header">
       <span class="modal-title" id="modal-title">🎬</span>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" id="close-player-modal">✕</button>
     </div>
     <div class="video-container">
       <video id="video-player" controls autoplay playsinline></video>
@@ -1296,7 +1296,7 @@
         <div class="err-icon">⚠️</div>
         <div class="err-text" id="error-detail">تعذر تشغيل القناة</div>
         <div class="err-hint" id="error-hint">الصيغة غير مدعومة أو السيرفر غير متاح</div>
-        <button class="btn-retry" onclick="retryStream()">إعادة المحاولة ↺</button>
+        <button class="btn-retry" id="retry-stream">إعادة المحاولة ↺</button>
       </div>
     </div>
     <div class="player-status">
@@ -1307,43 +1307,113 @@
 </div>
 
 <script>
+// ==================== الإعدادات والمتغيرات العامة ====================
 let API = { server: '', user: '', pass: '' };
 let DATA = { live: [], movies: [], series: [] };
 let ACTIVE_CATEGORY = { live: 'all', movies: 'all', series: 'all' };
 let CATS_OPEN = { live: false, movies: false, series: false };
 
-/* ====== CATEGORY TOGGLE ====== */
-function toggleCats(type) {
-  const wrapper = document.getElementById(type + '-cats-wrapper');
-  const btn     = document.getElementById('toggle-' + type + '-cats');
-  const isOpen  = CATS_OPEN[type];
+// متغيرات التشغيل
+let _libLoaded = {}, _hlsInst = null, _mpegtsInst = null;
+let _currentUrl = '', _currentName = '', _strategyIdx = 0, _strategies = [];
 
-  CATS_OPEN[type] = !isOpen;
-  wrapper.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
+// مكتبات HLS و mpegts
+const LIB = {
+  hls:    'https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js',
+  mpegts: 'https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js',
+};
+
+// ==================== دوال المساعدة ====================
+function esc(str) { 
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); 
 }
 
-function updateCatsLabel(type, labelText) {
-  const label = document.getElementById(type + '-cats-label');
-  if (label) label.textContent = labelText;
+function escQ(str) { 
+  return (str||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); 
 }
 
+function emptyState(msg) { 
+  return `<div class="empty-state"><div class="e-icon">𒁹</div><p>${msg}</p></div>`; 
+}
+
+function showError(msg) { 
+  const el = document.getElementById('error-msg'); 
+  el.textContent = msg; 
+  el.style.display = 'block'; 
+}
+
+function hideError() { 
+  document.getElementById('error-msg').style.display = 'none'; 
+}
+
+function setStatus(cls, text) { 
+  const b = document.getElementById('status-badge'); 
+  b.className = 'status-badge ' + cls; 
+  b.textContent = text; 
+}
+
+function setFormat(text) { 
+  document.getElementById('format-label').textContent = text; 
+}
+
+function showPlayerError(detail, hint) { 
+  document.getElementById('error-detail').textContent = detail || 'تعذر التشغيل'; 
+  document.getElementById('error-hint').textContent = hint || ''; 
+  document.getElementById('error-overlay').classList.add('show'); 
+  setStatus('error', '✕ خطأ'); 
+}
+
+function hidePlayerError() { 
+  document.getElementById('error-overlay').classList.remove('show'); 
+}
+
+function destroyAll() {
+  if (_hlsInst) { 
+    try { _hlsInst.destroy(); } catch(e){} 
+    _hlsInst = null; 
+  }
+  if (_mpegtsInst) { 
+    try { _mpegtsInst.destroy(); } catch(e){} 
+    _mpegtsInst = null; 
+  }
+}
+
+// ==================== دوال API مع دعم CORS ====================
 function xUrl(action, extra = '') {
   return `${API.server}/player_api.php?username=${API.user}&password=${API.pass}&action=${action}${extra}`;
 }
 
 async function apiFetch(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  return res.json();
+  try {
+    // محاولة عادية أولاً
+    const res = await fetch(url);
+    if (res.ok) return res.json();
+    
+    // إذا فشلت بسبب CORS، جرب مع CORS proxy
+    console.log('CORS error detected, trying with proxy...');
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/' + url;
+    const proxyRes = await fetch(proxyUrl, {
+      headers: { 'Origin': window.location.origin }
+    });
+    
+    if (!proxyRes.ok) throw new Error('HTTP ' + proxyRes.status);
+    return proxyRes.json();
+  } catch (e) {
+    console.error('API fetch error:', e);
+    throw e;
+  }
 }
 
+// ==================== دوال تسجيل الدخول والخروج ====================
 async function doLogin() {
   const server = document.getElementById('server-url').value.trim().replace(/\/$/, '');
   const user   = document.getElementById('username').value.trim();
   const pass   = document.getElementById('password').value;
 
-  if (!server || !user || !pass) { showError('يرجى ملء جميع الحقول'); return; }
+  if (!server || !user || !pass) { 
+    showError('يرجى ملء جميع الحقول'); 
+    return; 
+  }
 
   const btn = document.getElementById('login-btn');
   const txt = document.getElementById('login-btn-text');
@@ -1353,18 +1423,33 @@ async function doLogin() {
 
   try {
     API = { server, user, pass };
+    
+    // تجربة الاتصال بالسيرفر
     const info = await apiFetch(`${server}/player_api.php?username=${user}&password=${pass}`);
-    if (!info || info.user_info?.auth === 0 || info.user_info?.auth === '0') throw new Error('بيانات خاطئة');
+    
+    if (!info || info.user_info?.auth === 0 || info.user_info?.auth === '0') {
+      throw new Error('بيانات الدخول غير صحيحة');
+    }
 
+    // حفظ الجلسة
+    sessionStorage.setItem('iptv_session', JSON.stringify({ server, user, pass }));
+    
+    // إظهار المحتوى الرئيسي
     document.getElementById('nav-server').textContent = server;
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('main-section').style.display = 'block';
-    sessionStorage.setItem('iptv_session', JSON.stringify({ server, user, pass }));
-    loadLive(); loadMovies(); loadSeries();
+    
+    // تحميل البيانات
+    loadLive();
+    loadMovies();
+    loadSeries();
+    
   } catch (e) {
+    console.error('Login error:', e);
     showError('تعذر الاتصال: ' + (e.message || 'خطأ في البيانات'));
     btn.disabled = false;
     txt.textContent = 'دخول البوابة';
+    API = { server: '', user: '', pass: '' };
   }
 }
 
@@ -1374,24 +1459,35 @@ function doLogout() {
   sessionStorage.removeItem('iptv_session');
   document.getElementById('main-section').style.display = 'none';
   document.getElementById('login-section').style.display = 'flex';
-  ['live-grid','movies-grid','series-grid'].forEach(id => document.getElementById(id).innerHTML = '');
-  document.getElementById('login-btn').disabled = false;
+  
+  // تنظيف المحتوى
+  ['live-grid', 'movies-grid', 'series-grid'].forEach(id => 
+    document.getElementById(id).innerHTML = ''
+  );
+  
+  // إعادة تمكين زر login
+  const loginBtn = document.getElementById('login-btn');
+  loginBtn.disabled = false;
   document.getElementById('login-btn-text').textContent = 'دخول البوابة';
 }
 
-function showError(msg) { const el = document.getElementById('error-msg'); el.textContent = msg; el.style.display = 'block'; }
-function hideError() { document.getElementById('error-msg').style.display = 'none'; }
-
+// ==================== دوال تحميل المحتوى ====================
 async function loadLive() {
   const spinner = document.getElementById('live-spinner');
   spinner.classList.add('active');
   try {
-    const [cats, channels] = await Promise.all([apiFetch(xUrl('get_live_categories')), apiFetch(xUrl('get_live_streams'))]);
-    DATA.live = channels;
-    renderCategoryFilter('live', cats);
-    renderLive(channels);
-    document.getElementById('live-count').textContent = channels.length + ' قناة';
-  } catch(e) { document.getElementById('live-grid').innerHTML = emptyState('تعذر تحميل القنوات'); }
+    const [cats, channels] = await Promise.all([
+      apiFetch(xUrl('get_live_categories')),
+      apiFetch(xUrl('get_live_streams'))
+    ]);
+    DATA.live = channels || [];
+    renderCategoryFilter('live', cats || []);
+    renderLive(channels || []);
+    document.getElementById('live-count').textContent = (channels?.length || 0) + ' قناة';
+  } catch(e) {
+    console.error('Load live error:', e);
+    document.getElementById('live-grid').innerHTML = emptyState('تعذر تحميل القنوات - تحقق من اتصال CORS');
+  }
   spinner.classList.remove('active');
 }
 
@@ -1399,12 +1495,18 @@ async function loadMovies() {
   const spinner = document.getElementById('movies-spinner');
   spinner.classList.add('active');
   try {
-    const [cats, movies] = await Promise.all([apiFetch(xUrl('get_vod_categories')), apiFetch(xUrl('get_vod_streams'))]);
-    DATA.movies = movies;
-    renderCategoryFilter('movies', cats);
-    renderMovies(movies);
-    document.getElementById('movies-count').textContent = movies.length + ' فيلم';
-  } catch(e) { document.getElementById('movies-grid').innerHTML = emptyState('تعذر تحميل الأفلام'); }
+    const [cats, movies] = await Promise.all([
+      apiFetch(xUrl('get_vod_categories')),
+      apiFetch(xUrl('get_vod_streams'))
+    ]);
+    DATA.movies = movies || [];
+    renderCategoryFilter('movies', cats || []);
+    renderMovies(movies || []);
+    document.getElementById('movies-count').textContent = (movies?.length || 0) + ' فيلم';
+  } catch(e) {
+    console.error('Load movies error:', e);
+    document.getElementById('movies-grid').innerHTML = emptyState('تعذر تحميل الأفلام');
+  }
   spinner.classList.remove('active');
 }
 
@@ -1412,20 +1514,30 @@ async function loadSeries() {
   const spinner = document.getElementById('series-spinner');
   spinner.classList.add('active');
   try {
-    const [cats, series] = await Promise.all([apiFetch(xUrl('get_series_categories')), apiFetch(xUrl('get_series'))]);
-    DATA.series = series;
-    renderCategoryFilter('series', cats);
-    renderSeries(series);
-    document.getElementById('series-count').textContent = series.length + ' مسلسل';
-  } catch(e) { document.getElementById('series-grid').innerHTML = emptyState('تعذر تحميل المسلسلات'); }
+    const [cats, series] = await Promise.all([
+      apiFetch(xUrl('get_series_categories')),
+      apiFetch(xUrl('get_series'))
+    ]);
+    DATA.series = series || [];
+    renderCategoryFilter('series', cats || []);
+    renderSeries(series || []);
+    document.getElementById('series-count').textContent = (series?.length || 0) + ' مسلسل';
+  } catch(e) {
+    console.error('Load series error:', e);
+    document.getElementById('series-grid').innerHTML = emptyState('تعذر تحميل المسلسلات');
+  }
   spinner.classList.remove('active');
 }
 
+// ==================== دوال عرض المحتوى ====================
 function renderLive(items) {
   const grid = document.getElementById('live-grid');
-  if (!items.length) { grid.innerHTML = emptyState('لا توجد قنوات'); return; }
+  if (!items || !items.length) { 
+    grid.innerHTML = emptyState('لا توجد قنوات'); 
+    return; 
+  }
   grid.innerHTML = items.slice(0, 300).map(ch => `
-    <div class="channel-card animate-in" onclick="playStream('${buildLiveUrl(ch)}','${escQ(ch.name)}')">
+    <div class="channel-card animate-in" data-stream-id="${ch.stream_id}" data-stream-name="${escQ(ch.name)}">
       <div class="channel-logo">
         ${ch.stream_icon ? `<img src="${ch.stream_icon}" onerror="this.style.display='none';this.parentElement.textContent='📡'" loading="lazy">` : '📡'}
       </div>
@@ -1434,13 +1546,26 @@ function renderLive(items) {
         <div class="channel-group">${esc(ch.category_name || '')}</div>
       </div>
     </div>`).join('');
+    
+  // إضافة مستمعي الأحداث للكروت
+  document.querySelectorAll('#live-grid .channel-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const streamId = this.dataset.streamId;
+      const streamName = this.dataset.streamName;
+      const url = buildLiveUrl({ stream_id: streamId });
+      playStream(url, streamName);
+    });
+  });
 }
 
 function renderMovies(items) {
   const grid = document.getElementById('movies-grid');
-  if (!items.length) { grid.innerHTML = emptyState('لا توجد أفلام'); return; }
+  if (!items || !items.length) { 
+    grid.innerHTML = emptyState('لا توجد أفلام'); 
+    return; 
+  }
   grid.innerHTML = items.slice(0, 300).map(m => `
-    <div class="movie-card animate-in" onclick="playStream('${buildMovieUrl(m)}','${escQ(m.name)}')">
+    <div class="movie-card animate-in" data-stream-id="${m.stream_id}" data-stream-name="${escQ(m.name)}">
       <div class="movie-poster">
         ${m.stream_icon ? `<img src="${m.stream_icon}" onerror="this.style.display='none'" loading="lazy">` : '🎬'}
       </div>
@@ -1449,13 +1574,25 @@ function renderMovies(items) {
         <div class="movie-category">${esc(m.category_name || '')}</div>
       </div>
     </div>`).join('');
+    
+  document.querySelectorAll('#movies-grid .movie-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const streamId = this.dataset.streamId;
+      const streamName = this.dataset.streamName;
+      const url = buildMovieUrl({ stream_id: streamId, container_extension: 'mp4' });
+      playStream(url, streamName);
+    });
+  });
 }
 
 function renderSeries(items) {
   const grid = document.getElementById('series-grid');
-  if (!items.length) { grid.innerHTML = emptyState('لا توجد مسلسلات'); return; }
+  if (!items || !items.length) { 
+    grid.innerHTML = emptyState('لا توجد مسلسلات'); 
+    return; 
+  }
   grid.innerHTML = items.slice(0, 300).map(s => `
-    <div class="series-card animate-in" onclick="openSeriesDetail(${s.series_id})">
+    <div class="series-card animate-in" data-series-id="${s.series_id}" data-series-name="${escQ(s.name)}">
       <div class="series-poster">
         ${s.cover ? `<img src="${s.cover}" onerror="this.style.display='none'" loading="lazy">` : '📺'}
       </div>
@@ -1464,179 +1601,396 @@ function renderSeries(items) {
         <div class="series-meta">${esc(s.category_name || '')}${s.rating_5based ? ' ⭐' + parseFloat(s.rating_5based).toFixed(1) : ''}</div>
       </div>
     </div>`).join('');
+    
+  document.querySelectorAll('#series-grid .series-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const seriesId = this.dataset.seriesId;
+      const seriesName = this.dataset.seriesName;
+      openSeriesDetail(seriesId, seriesName);
+    });
+  });
 }
 
 function renderCategoryFilter(type, cats) {
   const container = document.getElementById(type + '-cats');
   if (!cats || !cats.length) return;
+  
   container.innerHTML =
-    `<button class="cat-btn active" onclick="filterByCategory('${type}','all',this,'الكل')">الكل</button>` +
+    `<button class="cat-btn active" data-cat-id="all">الكل</button>` +
     cats.slice(0, 30).map(c =>
-      `<button class="cat-btn" onclick="filterByCategory('${type}','${escQ(c.category_id)}',this,'${escQ(c.category_name)}')">${esc(c.category_name)}</button>`
+      `<button class="cat-btn" data-cat-id="${c.category_id}" data-cat-name="${escQ(c.category_name)}">${esc(c.category_name)}</button>`
     ).join('');
+    
+  container.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const catId = this.dataset.catId;
+      const catName = this.dataset.catName || 'الكل';
+      
+      container.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      ACTIVE_CATEGORY[type] = catId;
+      document.getElementById(type + '-cats-label').textContent = catName;
+      filterContent(type, '');
+    });
+  });
 }
 
 function filterContent(type, query) {
-  const items = DATA[type];
-  const q = query.toLowerCase();
+  const items = DATA[type] || [];
+  const q = (query || '').toLowerCase();
   const catId = ACTIVE_CATEGORY[type];
+  
   let filtered = items;
-  if (catId !== 'all') filtered = filtered.filter(i => (i.category_id === catId || i.category_id === parseInt(catId)));
-  if (q) filtered = filtered.filter(i => (i.name || '').toLowerCase().includes(q));
+  if (catId !== 'all') {
+    filtered = filtered.filter(i => 
+      i.category_id == catId || i.category_id === parseInt(catId)
+    );
+  }
+  
+  if (q) {
+    filtered = filtered.filter(i => 
+      (i.name || '').toLowerCase().includes(q)
+    );
+  }
+  
   if (type === 'live') renderLive(filtered);
   else if (type === 'movies') renderMovies(filtered);
   else renderSeries(filtered);
 }
 
-function filterByCategory(type, catId, btn, labelText) {
-  ACTIVE_CATEGORY[type] = catId;
-  document.querySelectorAll('#' + type + '-cats .cat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  updateCatsLabel(type, labelText || 'الكل');
-  filterContent(type, '');
+// ==================== دوال بناء روابط البث ====================
+function buildLiveUrl(ch) { 
+  return `${API.server}/live/${API.user}/${API.pass}/${ch.stream_id}.m3u8`; 
 }
 
-function buildLiveUrl(ch) { return `${API.server}/live/${API.user}/${API.pass}/${ch.stream_id}.m3u8`; }
-function buildMovieUrl(m) { const ext = m.container_extension || 'mp4'; return `${API.server}/movie/${API.user}/${API.pass}/${m.stream_id}.${ext}`; }
-function buildEpisodeUrl(ep) { const ext = ep.container_extension || 'mkv'; return `${API.server}/series/${API.user}/${API.pass}/${ep.id}.${ext}`; }
-
-const LIB = {
-  hls:    'https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js',
-  mpegts: 'https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js',
-};
-
-let _libLoaded = {}, _hlsInst = null, _mpegtsInst = null;
-let _currentUrl = '', _currentName = '', _strategyIdx = 0, _strategies = [];
-
-async function ensureLib(key) {
-  if (_libLoaded[key]) return;
-  await new Promise((res, rej) => { const s = document.createElement('script'); s.src = LIB[key]; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-  _libLoaded[key] = true;
+function buildMovieUrl(m) { 
+  const ext = m.container_extension || 'mp4'; 
+  return `${API.server}/movie/${API.user}/${API.pass}/${m.stream_id}.${ext}`; 
 }
 
-function setStatus(cls, text) { const b = document.getElementById('status-badge'); b.className = 'status-badge ' + cls; b.textContent = text; }
-function setFormat(text) { document.getElementById('format-label').textContent = text; }
-function showPlayerError(detail, hint) { document.getElementById('error-detail').textContent = detail || 'تعذر التشغيل'; document.getElementById('error-hint').textContent = hint || ''; document.getElementById('error-overlay').classList.add('show'); setStatus('error', '✕ خطأ'); }
-function hidePlayerError() { document.getElementById('error-overlay').classList.remove('show'); }
-
-function destroyAll() {
-  if (_hlsInst)    { try { _hlsInst.destroy(); } catch(e){} _hlsInst = null; }
-  if (_mpegtsInst) { try { _mpegtsInst.destroy(); } catch(e){} _mpegtsInst = null; }
+function buildEpisodeUrl(ep) { 
+  const ext = ep.container_extension || 'mkv'; 
+  return `${API.server}/series/${API.user}/${API.pass}/${ep.id}.${ext}`; 
 }
 
 function buildVariants(originalUrl) {
   const m = originalUrl.match(/^(https?:\/\/[^/]+)\/(live|movie|series)\/([^/]+)\/([^/]+)\/(\d+)\./i);
   if (!m) return [originalUrl];
+  
   const [, base, type, user, pass, id] = m;
-  if (type === 'live') return [`${base}/live/${user}/${pass}/${id}.m3u8`, `${base}/live/${user}/${pass}/${id}.ts`, `${base}/live/${user}/${pass}/${id}.mp4`];
-  if (type === 'series') { const orig = originalUrl.split('.').pop().toLowerCase(); const v = [originalUrl]; ['mkv','mp4','avi','ts','m4v'].forEach(e => { if(e!==orig) v.push(`${base}/series/${user}/${pass}/${id}.${e}`); }); v.push(`${base}/series/${user}/${pass}/${id}.m3u8`); return v; }
-  if (type === 'movie') { const orig = originalUrl.split('.').pop().toLowerCase(); const v = [originalUrl]; ['mp4','mkv','avi','ts','m4v'].forEach(e => { if(e!==orig) v.push(`${base}/movie/${user}/${pass}/${id}.${e}`); }); return v; }
+  
+  if (type === 'live') {
+    return [
+      `${base}/live/${user}/${pass}/${id}.m3u8`,
+      `${base}/live/${user}/${pass}/${id}.ts`,
+      `${base}/live/${user}/${pass}/${id}.mp4`
+    ];
+  }
+  
+  if (type === 'series') { 
+    const orig = originalUrl.split('.').pop().toLowerCase(); 
+    const v = [originalUrl]; 
+    ['mkv','mp4','avi','ts','m4v'].forEach(e => { 
+      if(e!==orig) v.push(`${base}/series/${user}/${pass}/${id}.${e}`); 
+    }); 
+    v.push(`${base}/series/${user}/${pass}/${id}.m3u8`); 
+    return v; 
+  }
+  
+  if (type === 'movie') { 
+    const orig = originalUrl.split('.').pop().toLowerCase(); 
+    const v = [originalUrl]; 
+    ['mp4','mkv','avi','ts','m4v'].forEach(e => { 
+      if(e!==orig) v.push(`${base}/movie/${user}/${pass}/${id}.${e}`); 
+    }); 
+    return v; 
+  }
+  
   return [originalUrl];
 }
 
-async function playStream(url, name) {
-  _currentUrl = url; _currentName = name;
-  document.getElementById('modal-title').textContent = name;
-  document.getElementById('player-modal').classList.add('active');
-  hidePlayerError(); setStatus('loading', '⏳ جاري التحميل'); setFormat('—');
-  destroyAll();
-  const video = document.getElementById('video-player');
-  video.src = ''; video.load(); video.onerror = null;
-  _strategies = buildPlayStrategies(url); _strategyIdx = 0;
-  await tryStrategy(video);
-}
-
 function buildPlayStrategies(url) {
-  const variants = buildVariants(url); const strats = [];
+  const variants = buildVariants(url); 
+  const strats = [];
+  
   variants.forEach(vUrl => {
     const ext = vUrl.toLowerCase().split('?')[0].split('.').pop();
-    if (ext === 'm3u8') { strats.push({engine:'hls',url:vUrl,label:'HLS'}); strats.push({engine:'native',url:vUrl,label:'HLS·Native'}); }
-    else if (ext === 'ts' || ext === 'mpeg') { strats.push({engine:'mpegts',url:vUrl,label:'TS·mpegts'}); strats.push({engine:'hls',url:vUrl,label:'TS·HLS'}); strats.push({engine:'native',url:vUrl,label:'TS·Native'}); }
-    else if (ext === 'mp4' || ext === 'webm' || ext === 'm4v') { strats.push({engine:'native',url:vUrl,label:ext.toUpperCase()}); strats.push({engine:'hls',url:vUrl,label:ext.toUpperCase()+'·HLS'}); }
-    else if (ext === 'mkv' || ext === 'avi' || ext === 'flv') { strats.push({engine:'native',url:vUrl,label:ext.toUpperCase()+'·Native'}); strats.push({engine:'mpegts',url:vUrl,label:ext.toUpperCase()+'·mpegts'}); strats.push({engine:'hls',url:vUrl,label:ext.toUpperCase()+'·HLS'}); }
-    else { strats.push({engine:'hls',url:vUrl,label:'HLS'}); strats.push({engine:'native',url:vUrl,label:'Native'}); }
+    if (ext === 'm3u8') { 
+      strats.push({engine:'hls', url:vUrl, label:'HLS'}); 
+      strats.push({engine:'native', url:vUrl, label:'HLS·Native'}); 
+    }
+    else if (ext === 'ts' || ext === 'mpeg') { 
+      strats.push({engine:'mpegts', url:vUrl, label:'TS·mpegts'}); 
+      strats.push({engine:'hls', url:vUrl, label:'TS·HLS'}); 
+      strats.push({engine:'native', url:vUrl, label:'TS·Native'}); 
+    }
+    else if (ext === 'mp4' || ext === 'webm' || ext === 'm4v') { 
+      strats.push({engine:'native', url:vUrl, label:ext.toUpperCase()}); 
+      strats.push({engine:'hls', url:vUrl, label:ext.toUpperCase()+'·HLS'}); 
+    }
+    else if (ext === 'mkv' || ext === 'avi' || ext === 'flv') { 
+      strats.push({engine:'native', url:vUrl, label:ext.toUpperCase()+'·Native'}); 
+      strats.push({engine:'mpegts', url:vUrl, label:ext.toUpperCase()+'·mpegts'}); 
+      strats.push({engine:'hls', url:vUrl, label:ext.toUpperCase()+'·HLS'}); 
+    }
+    else { 
+      strats.push({engine:'hls', url:vUrl, label:'HLS'}); 
+      strats.push({engine:'native', url:vUrl, label:'Native'}); 
+    }
   });
+  
   return strats;
 }
 
-async function tryStrategy(video) {
-  if (_strategyIdx >= _strategies.length) { showPlayerError('تعذر تشغيل هذا المحتوى', 'جُرِّبت جميع الصيغ المتاحة'); return; }
-  const strat = _strategies[_strategyIdx];
-  setStatus('loading', `⏳ ${strat.label}`); setFormat(strat.label);
-  destroyAll(); video.src = ''; video.load(); video.onerror = null;
-  try {
-    if (strat.engine === 'hls') await tryHls(strat.url, strat.label, video);
-    else if (strat.engine === 'mpegts') await tryMpegts(strat.url, strat.label, video);
-    else tryNativeEngine(strat.url, strat.label, video);
-  } catch(e) { nextStrategy(video); }
+// ==================== دوال تشغيل الفيديو ====================
+async function ensureLib(key) {
+  if (_libLoaded[key]) return;
+  await new Promise((resolve, reject) => { 
+    const s = document.createElement('script'); 
+    s.src = LIB[key]; 
+    s.onload = resolve; 
+    s.onerror = reject; 
+    document.head.appendChild(s); 
+  });
+  _libLoaded[key] = true;
 }
 
-function nextStrategy(video) { _strategyIdx++; setTimeout(() => tryStrategy(video), 300); }
+async function tryStrategy(video) {
+  if (_strategyIdx >= _strategies.length) { 
+    showPlayerError('تعذر تشغيل هذا المحتوى', 'جُرِّبت جميع الصيغ المتاحة'); 
+    return; 
+  }
+  
+  const strat = _strategies[_strategyIdx];
+  setStatus('loading', `⏳ ${strat.label}`); 
+  setFormat(strat.label);
+  destroyAll(); 
+  video.src = ''; 
+  video.load(); 
+  video.onerror = null;
+  
+  try {
+    if (strat.engine === 'hls') {
+      await tryHls(strat.url, strat.label, video);
+    } else if (strat.engine === 'mpegts') {
+      await tryMpegts(strat.url, strat.label, video);
+    } else {
+      tryNativeEngine(strat.url, strat.label, video);
+    }
+  } catch(e) {
+    console.log('Strategy failed:', strat.label, e);
+    nextStrategy(video);
+  }
+}
+
+function nextStrategy(video) { 
+  _strategyIdx++; 
+  setTimeout(() => tryStrategy(video), 300); 
+}
 
 async function tryHls(url, label, video) {
   await ensureLib('hls');
-  if (video.canPlayType('application/vnd.apple.mpegurl') && !window.Hls) { video.src = url; video.load(); video.play().catch(()=>{}); setStatus('hls','▶ HLS·Safari'); setFormat(label); return; }
+  
+  if (video.canPlayType('application/vnd.apple.mpegurl') && !window.Hls) { 
+    video.src = url; 
+    video.load(); 
+    video.play().catch(()=>{}); 
+    setStatus('hls','▶ HLS·Safari'); 
+    setFormat(label); 
+    return; 
+  }
+  
   if (!window.Hls || !Hls.isSupported()) throw new Error('HLS not supported');
-  const hls = new Hls({ enableWorker:true, lowLatencyMode:true, fragLoadingTimeOut:20000, manifestLoadingTimeOut:15000, levelLoadingTimeOut:15000, maxBufferLength:60, backBufferLength:30 });
+  
+  const hls = new Hls({ 
+    enableWorker: true, 
+    lowLatencyMode: true, 
+    fragLoadingTimeOut: 20000, 
+    manifestLoadingTimeOut: 15000, 
+    levelLoadingTimeOut: 15000, 
+    maxBufferLength: 60, 
+    backBufferLength: 30 
+  });
+  
   _hlsInst = hls;
+  
   return new Promise((resolve, reject) => {
     let started = false;
-    hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play().catch(()=>{}); setStatus('hls','▶ '+label); setFormat(label); started=true; resolve(); });
-    hls.on(Hls.Events.ERROR, (e, data) => { if (data.fatal) { if (!started) { hls.destroy(); _hlsInst=null; reject(data); } else if (data.type===Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad(); else if (data.type===Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError(); else showPlayerError('انقطع البث', data.details||''); } });
-    hls.loadSource(url); hls.attachMedia(video);
-    setTimeout(() => { if (!started) { hls.destroy(); _hlsInst=null; reject(new Error('timeout')); } }, 12000);
+    
+    hls.on(Hls.Events.MANIFEST_PARSED, () => { 
+      video.play().catch(()=>{}); 
+      setStatus('hls','▶ '+label); 
+      setFormat(label); 
+      started = true; 
+      resolve(); 
+    });
+    
+    hls.on(Hls.Events.ERROR, (e, data) => { 
+      if (data.fatal) { 
+        if (!started) { 
+          hls.destroy(); 
+          _hlsInst = null; 
+          reject(data); 
+        } else if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+          hls.startLoad(); 
+        } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+          hls.recoverMediaError(); 
+        } else {
+          showPlayerError('انقطع البث', data.details||''); 
+        }
+      } 
+    });
+    
+    hls.loadSource(url); 
+    hls.attachMedia(video);
+    
+    setTimeout(() => { 
+      if (!started) { 
+        hls.destroy(); 
+        _hlsInst = null; 
+        reject(new Error('timeout')); 
+      } 
+    }, 12000);
   });
 }
 
 async function tryMpegts(url, label, video) {
   await ensureLib('mpegts');
   if (!window.mpegts || !mpegts.isSupported()) throw new Error('mpegts not supported');
-  const player = mpegts.createPlayer({ type:'mse', url, isLive:_currentUrl.includes('/live/'), cors:true, withCredentials:false }, { enableWorker:true, enableStashBuffer:true, stashInitialSize:1024*128 });
+  
+  const player = mpegts.createPlayer(
+    { type: 'mse', url, isLive: _currentUrl.includes('/live/'), cors: true, withCredentials: false }, 
+    { enableWorker: true, enableStashBuffer: true, stashInitialSize: 1024 * 128 }
+  );
+  
   _mpegtsInst = player;
+  
   return new Promise((resolve, reject) => {
     let started = false;
-    player.on(mpegts.Events.MEDIA_INFO, () => { player.play(); setStatus('hls','▶ '+label); setFormat(label); started=true; resolve(); });
-    player.on(mpegts.Events.ERROR, (errType, errDetail) => { if (!started) { player.destroy(); _mpegtsInst=null; reject(new Error(errDetail)); } });
-    player.attachMediaElement(video); player.load();
-    setTimeout(() => { if (!started) { try{player.destroy();}catch(e){} _mpegtsInst=null; reject(new Error('timeout')); } }, 12000);
+    
+    player.on(mpegts.Events.MEDIA_INFO, () => { 
+      player.play(); 
+      setStatus('hls','▶ '+label); 
+      setFormat(label); 
+      started = true; 
+      resolve(); 
+    });
+    
+    player.on(mpegts.Events.ERROR, (errType, errDetail) => { 
+      if (!started) { 
+        player.destroy(); 
+        _mpegtsInst = null; 
+        reject(new Error(errDetail)); 
+      } 
+    });
+    
+    player.attachMediaElement(video); 
+    player.load();
+    
+    setTimeout(() => { 
+      if (!started) { 
+        try{ player.destroy(); } catch(e){} 
+        _mpegtsInst = null; 
+        reject(new Error('timeout')); 
+      } 
+    }, 12000);
   });
 }
 
 function tryNativeEngine(url, label, video) {
-  video.src = url; video.load(); setStatus('native','▶ '+label); setFormat(label);
-  video.oncanplay = () => { video.play().catch(()=>{}); video.oncanplay=null; video.onerror=null; };
-  video.onerror = () => { video.onerror=null; video.oncanplay=null; nextStrategy(video); };
-  setTimeout(() => { if (video.readyState < 2 && video.src === url) { video.onerror=null; video.oncanplay=null; nextStrategy(video); } }, 10000);
+  video.src = url; 
+  video.load(); 
+  setStatus('native','▶ '+label); 
+  setFormat(label);
+  
+  video.oncanplay = () => { 
+    video.play().catch(()=>{}); 
+    video.oncanplay = null; 
+    video.onerror = null; 
+  };
+  
+  video.onerror = () => { 
+    video.onerror = null; 
+    video.oncanplay = null; 
+    nextStrategy(video); 
+  };
+  
+  setTimeout(() => { 
+    if (video.readyState < 2 && video.src === url) { 
+      video.onerror = null; 
+      video.oncanplay = null; 
+      nextStrategy(video); 
+    } 
+  }, 10000);
 }
 
-function retryStream() { if (_currentUrl) playStream(_currentUrl, _currentName); }
+async function playStream(url, name) {
+  _currentUrl = url; 
+  _currentName = name;
+  document.getElementById('modal-title').textContent = name;
+  document.getElementById('player-modal').classList.add('active');
+  hidePlayerError(); 
+  setStatus('loading', '⏳ جاري التحميل'); 
+  setFormat('—');
+  destroyAll();
+  
+  const video = document.getElementById('video-player');
+  video.src = ''; 
+  video.load(); 
+  video.onerror = null;
+  
+  _strategies = buildPlayStrategies(url); 
+  _strategyIdx = 0;
+  await tryStrategy(video);
+}
+
+function retryStream() { 
+  if (_currentUrl) playStream(_currentUrl, _currentName); 
+}
 
 function closeModal() {
   destroyAll();
   const video = document.getElementById('video-player');
-  video.src = ''; video.load(); video.onerror = null; video.oncanplay = null;
-  hidePlayerError(); setStatus('loading','⏳ جاري التحميل'); setFormat('—');
+  video.src = ''; 
+  video.load(); 
+  video.onerror = null; 
+  video.oncanplay = null;
+  hidePlayerError(); 
+  setStatus('loading','⏳ جاري التحميل'); 
+  setFormat('—');
   document.getElementById('player-modal').classList.remove('active');
 }
 
-document.getElementById('player-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-
+// ==================== دوال المسلسلات ====================
 let _currentSeasonsData = {};
+let _currentSeriesName = '';
 
-async function openSeriesDetail(seriesId) {
+async function openSeriesDetail(seriesId, seriesName) {
+  _currentSeriesName = seriesName;
   document.getElementById('series-modal').classList.add('active');
-  document.getElementById('series-detail-content').innerHTML = `<div class="series-loading"><div class="sumerian-spinner"></div><div class="spinner-text">جاري تحميل التفاصيل</div></div>`;
-  try { const data = await apiFetch(xUrl('get_series_info', `&series_id=${seriesId}`)); renderSeriesDetail(data); }
-  catch(e) { document.getElementById('series-detail-content').innerHTML = `<div class="series-loading"><div class="empty-state"><div class="e-icon">⚠️</div><p>تعذر تحميل تفاصيل المسلسل</p></div></div>`; }
+  document.getElementById('series-detail-content').innerHTML = 
+    `<div class="series-loading"><div class="sumerian-spinner"></div><div class="spinner-text">جاري تحميل التفاصيل</div></div>`;
+  
+  try { 
+    const data = await apiFetch(xUrl('get_series_info', `&series_id=${seriesId}`)); 
+    renderSeriesDetail(data); 
+  } catch(e) { 
+    console.error('Series detail error:', e);
+    document.getElementById('series-detail-content').innerHTML = 
+      `<div class="series-loading"><div class="empty-state"><div class="e-icon">⚠️</div><p>تعذر تحميل تفاصيل المسلسل</p></div></div>`; 
+  }
 }
 
 function renderSeriesDetail(data) {
-  const info = data.info || {}, episodes = data.episodes || {};
+  const info = data.info || {}; 
+  const episodes = data.episodes || {};
   _currentSeasonsData = episodes;
+  
   const seasons = Object.keys(episodes).sort((a,b) => Number(a)-Number(b));
   const hasSeasons = seasons.length > 0;
   const cover = info.cover || info.movie_image || '';
-  const title = info.name || info.title || 'مسلسل';
+  const title = info.name || info.title || _currentSeriesName || 'مسلسل';
   const plot  = info.plot || info.description || '';
   const year  = info.releaseDate || info.year || '';
   const rating= info.rating || info.rating_5based || '';
@@ -1660,78 +2014,217 @@ function renderSeriesDetail(data) {
     </div>
     ${hasSeasons ? `
     <div class="seasons-bar" id="seasons-bar">
-      ${seasons.map((s,i) => `<button class="season-tab ${i===0?'active':''}" onclick="renderEpisodes('${s}', this)">الموسم ${s}</button>`).join('')}
+      ${seasons.map((s,i) => `<button class="season-tab ${i===0?'active':''}" data-season="${s}">الموسم ${s}</button>`).join('')}
     </div>
     <div class="episodes-container"><div class="episodes-grid" id="episodes-grid"></div></div>` :
     `<div class="series-loading"><div class="empty-state"><div class="e-icon">𒁹</div><p>لا توجد حلقات متاحة</p></div></div>`}`;
 
-  if (hasSeasons) renderEpisodes(seasons[0]);
+  if (hasSeasons) {
+    renderEpisodes(seasons[0]);
+    
+    document.querySelectorAll('.season-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderEpisodes(this.dataset.season);
+      });
+    });
+  }
 }
 
-function renderEpisodes(season, btn) {
-  if (btn) { document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+function renderEpisodes(season) {
   const eps = _currentSeasonsData[season] || [];
   const grid = document.getElementById('episodes-grid');
   if (!grid) return;
-  if (!eps.length) { grid.innerHTML = `<div class="empty-state" style="padding:40px;grid-column:1/-1;"><div class="e-icon">𒁹</div><p>لا توجد حلقات في هذا الموسم</p></div>`; return; }
+  
+  if (!eps.length) { 
+    grid.innerHTML = `<div class="empty-state" style="padding:40px;grid-column:1/-1;"><div class="e-icon">𒁹</div><p>لا توجد حلقات في هذا الموسم</p></div>`; 
+    return; 
+  }
+  
   grid.innerHTML = eps.map(ep => {
-    const epUrl = buildEpisodeUrl(ep), epName = ep.title || ep.name || `الحلقة ${ep.episode_num}`;
+    const epUrl = buildEpisodeUrl(ep);
+    const epName = ep.title || ep.name || `الحلقة ${ep.episode_num}`;
     const dur = ep.info?.duration_secs ? Math.round(ep.info.duration_secs/60) + ' دقيقة' : '';
-    return `<div class="episode-card" onclick="playEpisode('${escQ(epUrl)}','${escQ(epName)}')">
+    
+    return `<div class="episode-card" data-ep-url="${escQ(epUrl)}" data-ep-name="${escQ(epName)}">
       <div class="ep-num">${ep.episode_num || '?'}</div>
       <div class="ep-info"><div class="ep-title">${esc(epName)}</div><div class="ep-meta">${dur ? dur : (ep.container_extension||'').toUpperCase()}</div></div>
       <div class="ep-play">▶</div>
     </div>`;
   }).join('');
+  
+  grid.querySelectorAll('.episode-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const url = this.dataset.epUrl;
+      const name = this.dataset.epName;
+      closeSeriesModal();
+      setTimeout(() => playStream(url, name), 100);
+    });
+  });
 }
 
-function playEpisode(url, name) { closeSeriesModal(); setTimeout(() => playStream(url, name), 100); }
-function closeSeriesModal() { document.getElementById('series-modal').classList.remove('active'); }
-document.getElementById('series-modal').addEventListener('click', function(e) { if (e.target === this) closeSeriesModal(); });
+function closeSeriesModal() { 
+  document.getElementById('series-modal').classList.remove('active'); 
+}
 
-const TAB_TITLES = { live: '📡 البث المباشر', movies: '🎬 الأفلام', series: '📺 المسلسلات' };
+// ==================== دوال التبديل بين الأقسام ====================
+const TAB_TITLES = { 
+  live: '📡 البث المباشر', 
+  movies: '🎬 الأفلام', 
+  series: '📺 المسلسلات' 
+};
 
-function switchTab(name, btn) {
+function switchTab(name) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  
   document.getElementById('tab-' + name).classList.add('active');
-  btn.classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  
   const tb = document.getElementById('top-bar-title');
   if (tb) tb.textContent = TAB_TITLES[name] || '';
+  
   closeSidebar();
 }
 
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebar-overlay').classList.toggle('active'); }
-function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('active'); }
+function toggleSidebar() { 
+  document.getElementById('sidebar').classList.toggle('open'); 
+  document.getElementById('sidebar-overlay').classList.toggle('active'); 
+}
 
-function esc(str) { return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function escQ(str) { return (str||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
-function emptyState(msg) { return `<div class="empty-state"><div class="e-icon">𒁹</div><p>${msg}</p></div>`; }
+function closeSidebar() { 
+  document.getElementById('sidebar').classList.remove('open'); 
+  document.getElementById('sidebar-overlay').classList.remove('active'); 
+}
 
-(function restoreSession() {
+function toggleCats(type) {
+  const wrapper = document.getElementById(type + '-cats-wrapper');
+  const btn     = document.getElementById('toggle-' + type + '-cats');
+  const isOpen  = CATS_OPEN[type];
+
+  CATS_OPEN[type] = !isOpen;
+  wrapper.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+
+// ==================== استعادة الجلسة ====================
+function restoreSession() {
   try {
     const saved = sessionStorage.getItem('iptv_session');
     if (!saved) return;
+    
     const { server, user, pass } = JSON.parse(saved);
     if (!server || !user || !pass) return;
+    
     document.getElementById('server-url').value = server;
     document.getElementById('username').value = user;
     document.getElementById('password').value = pass;
+    
     API = { server, user, pass };
     document.getElementById('nav-server').textContent = server;
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('main-section').style.display = 'block';
-    loadLive(); loadMovies(); loadSeries();
-  } catch(e) { sessionStorage.removeItem('iptv_session'); }
-})();
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    if (document.getElementById('player-modal').classList.contains('active')) closeModal();
-    else if (document.getElementById('series-modal').classList.contains('active')) closeSeriesModal();
+    
+    // تأخير تحميل البيانات قليلاً
+    setTimeout(() => {
+      loadLive();
+      loadMovies();
+      loadSeries();
+    }, 500);
+    
+  } catch(e) { 
+    console.error('Restore session error:', e);
+    sessionStorage.removeItem('iptv_session'); 
   }
-  if (e.key === 'Enter' && document.getElementById('login-section').style.display !== 'none') doLogin();
+}
+
+// ==================== تهيئة التطبيق ====================
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ربط أحداث تسجيل الدخول
+  const loginBtn = document.getElementById('login-btn');
+  loginBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    doLogin();
+  });
+  
+  // ربط أحداث Enter للحقول
+  const serverInput = document.getElementById('server-url');
+  const userInput = document.getElementById('username');
+  const passInput = document.getElementById('password');
+  
+  [serverInput, userInput, passInput].forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        doLogin();
+      }
+    });
+  });
+  
+  // ربط أحدات الخروج
+  document.getElementById('logout-btn').addEventListener('click', doLogout);
+  
+  // ربط أحداث الهامبرغر
+  document.getElementById('hamburger-btn').addEventListener('click', toggleSidebar);
+  document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+  
+  // ربط أحداث التبديل بين الأقسام
+  document.getElementById('nav-live').addEventListener('click', () => switchTab('live'));
+  document.getElementById('nav-movies').addEventListener('click', () => switchTab('movies'));
+  document.getElementById('nav-series').addEventListener('click', () => switchTab('series'));
+  
+  // ربط أحداث البحث
+  document.getElementById('live-search').addEventListener('input', (e) => filterContent('live', e.target.value));
+  document.getElementById('movies-search').addEventListener('input', (e) => filterContent('movies', e.target.value));
+  document.getElementById('series-search').addEventListener('input', (e) => filterContent('series', e.target.value));
+  
+  // ربط أحداث toggle الأقسام
+  document.getElementById('toggle-live-cats').addEventListener('click', () => toggleCats('live'));
+  document.getElementById('toggle-movies-cats').addEventListener('click', () => toggleCats('movies'));
+  document.getElementById('toggle-series-cats').addEventListener('click', () => toggleCats('series'));
+  
+  // ربط أحداث المودالات
+  document.getElementById('close-player-modal').addEventListener('click', closeModal);
+  document.getElementById('player-modal').addEventListener('click', function(e) { 
+    if (e.target === this) closeModal(); 
+  });
+  
+  document.getElementById('close-series-modal').addEventListener('click', closeSeriesModal);
+  document.getElementById('series-modal').addEventListener('click', function(e) { 
+    if (e.target === this) closeSeriesModal(); 
+  });
+  
+  document.getElementById('retry-stream').addEventListener('click', retryStream);
+  
+  // ربط أحداث لوحة المفاتيح
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('player-modal').classList.contains('active')) {
+        closeModal();
+      } else if (document.getElementById('series-modal').classList.contains('active')) {
+        closeSeriesModal();
+      }
+    }
+  });
+  
+  // محاولة استعادة الجلسة
+  restoreSession();
 });
+
+// تعريف الدوال العامة للنطاق العالمي
+window.doLogin = doLogin;
+window.toggleSidebar = toggleSidebar;
+window.switchTab = switchTab;
+window.toggleCats = toggleCats;
+window.closeModal = closeModal;
+window.closeSeriesModal = closeSeriesModal;
+window.retryStream = retryStream;
+window.playStream = playStream;
+window.openSeriesDetail = openSeriesDetail;
+window.filterContent = filterContent;
+
 </script>
 </body>
 </html>
